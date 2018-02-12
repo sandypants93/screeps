@@ -89,7 +89,7 @@ var roleSpawner = {
                     {memory: {role: 'builder', state: 1, src: sources[0].id, home: spawn.id}});
                 }
                 else if(en >= 350) {
-                    spawn.spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName, {memory: {role: 'builder': state: 1, src: sources[0].id, home: spawn.id}});
+                    spawn.spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName, {memory: {role: 'builder', state: 1, src: sources[0].id, home: spawn.id}});
                 }
                 else {
                     spawn.spawnCreep([WORK, CARRY, MOVE], newName, {memory : {role : 'builder', state: 1, src: sources[0].id, home: spawn.id}});
