@@ -8,30 +8,32 @@ function energyTotal(spawn) {
     }
     return spawn.energy + exEnergy;
 }
+function creepNums(spawn) {
+    var har = 0, upg = 0, bui = 0;
+    for (var name in Game.creeps) {
+        var creep = Game.creeps[name];
+        if(creep.my) {
+            switch(creep.memory.role) {
+                case 'harvester':
+                    har++;
+                    break;
+                case 'upgrader':
+                    upg++;
+                    break;
+                case 'builder':
+                    bui++;
+                    break;
+            }
+        }
+    }
+    return [har, upg, bui];
+}
 var roleSpawner = {
     /** @param {Spawn} spawn **/
     run: function(spawn) {
-        var harvesters = 0;
-        var upgraders = 0;
-        var builders = 0;
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.my) {
-                switch(creep.memory.role) {
-                    case 'harvester':
-                        harvesters++;
-                        break;
-                    case 'upgrader':
-                        upgraders++;
-                        break;
-                    case 'builder':
-                        builders++;
-                        break;
-                }
-            }
-        }
+	var myCreeps = creepNums(spawn);
         var conLvl = spawn.room.controller.level;
-        if(harvesters < spawn.memory.maxHarvesters) {
+        if(myCreeps[0] < spawn.memory.maxHarvesters) {
             var en = energyTotal(spawn);
             if(en >= 200) {
                 var sources = spawn.room.find(FIND_SOURCES);
@@ -45,7 +47,7 @@ var roleSpawner = {
                 }
             }
         }
-        else if(upgraders < spawn.memory.maxUpgraders) {
+        else if(myCreeps[1] < spawn.memory.maxUpgraders) {
             var en = energyTotal(spawn);
             if(en >= 200) {
                 var sources = spawn.room.find(FIND_SOURCES);
@@ -59,7 +61,7 @@ var roleSpawner = {
                 }
             }
         }
-        else if(builders < spawn.memory.maxBuilders) {
+        else if(myCreeps[2] < spawn.memory.maxBuilders) {
             var en = energyTotal(spawn);
             if(en >= 200) {
                 var sources = spawn.room.find(FIND_SOURCES);
