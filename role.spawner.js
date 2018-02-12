@@ -35,12 +35,19 @@ var roleSpawner = {
         var conLvl = spawn.room.controller.level;
         if(myCreeps[0] < spawn.memory.maxHarvesters) {
             var en = energyTotal(spawn);
-            if(en >= 200) {
+            if(en >= 250) {
                 var sources = spawn.room.find(FIND_SOURCES);
                 var newName = spawn.name + '_harvester' + Game.time;
-                if(en >= 500) {
+                if(en >= 950) {
+                    spawn.spawnCreep([WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
+                    newName, {memory: {role: 'harvester', state: 1, src: sources[0].id, home: spawn.id}});
+                }
+                else if(en >= 500) {
                     spawn.spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                     {memory: {role: 'harvester', state: 1, src: sources[0].id, home: spawn.id}});
+                }
+                else if(en >= 350) {
+                    spawn.spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName, {memory: {role: 'harvester', state: 1, src: sources[0].id, home: spawn.id}});
                 }
                 else {
                     spawn.spawnCreep([WORK, CARRY, MOVE], newName, {memory : {role : 'harvester', state: 1, src : sources[0].id, home: spawn.id}});
@@ -49,26 +56,40 @@ var roleSpawner = {
         }
         else if(myCreeps[1] < spawn.memory.maxUpgraders) {
             var en = energyTotal(spawn);
-            if(en >= 200) {
+            if(en >= 250) {
                 var sources = spawn.room.find(FIND_SOURCES);
                 var newName = spawn.name + '_upgrader' + Game.time;
-                if(en >= 500) {
+                if(en >= 950) {
+                    spawn.spawnCreep([WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
+                    newName, {memory: {role: 'upgrader', state: 1, src: sources[0].id, home: spawn.id}});
+                }
+                else if(en >= 500) {
                     spawn.spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                     {memory: {role: 'upgrader', state: 1, src: sources[0].id, home: spawn.id}});
                 }
+                else if(en >= 350) {
+                    spawn.spawnCreep([WORK, WORK, CARRY, MOVE,  MOVE], newName, {memory: {role: 'upgrader', state: 1, src: sources[0].id, home: spawn.id}});
+                }
                 else {
-                    spawn.spawnCreep([WORK, CARRY, MOVE], newName, {memory : {role : 'upgrader', state: 1, src : sources[0].id, home: spawn.id}});
+                    spawn.spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {memory : {role : 'upgrader', state: 1, src : sources[0].id, home: spawn.id}});
                 }
             }
         }
         else if(myCreeps[2] < spawn.memory.maxBuilders) {
             var en = energyTotal(spawn);
-            if(en >= 200) {
+            if(en >= 250) {
                 var sources = spawn.room.find(FIND_SOURCES);
                 var newName = spawn.name + '_builder' + Game.time;
-                if(en >= 500) {
+                if(en >= 950) {
+                    spawn.spawnCreep([WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE],
+                    newName, {memory: {role: 'builder', state: 1, src: sources[0].id, home: spawn.id}});
+                }
+                else if(en >= 500) {
                     spawn.spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                     {memory: {role: 'builder', state: 1, src: sources[0].id, home: spawn.id}});
+                }
+                else if(en >= 350) {
+                    spawn.spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName, {memory: {role: 'builder': state: 1, src: sources[0].id, home: spawn.id}});
                 }
                 else {
                     spawn.spawnCreep([WORK, CARRY, MOVE], newName, {memory : {role : 'builder', state: 1, src: sources[0].id, home: spawn.id}});
