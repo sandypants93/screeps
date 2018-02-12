@@ -75,7 +75,13 @@ var roleBuilder = {
             else {
                 var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
                 if(sites.length) {
-                    var targ = creep.pos.findClosestByPath(bestSite(sites));
+                    var pri = _.filter(sites, (site) => site.structureType != STRUCTURE_WALL);
+                    if(pri.length) { 
+                        var targ = creep.pos.findClosestByPath(bestSite(pri));
+                    }
+                    else {
+                        var targ = creep.pos.findClosestByPath(bestSite(sites));
+                    }
                     if(creep.build(targ) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(targ, {visualizePathStyle : {stroke : '#ffffff'}});
                     }
@@ -89,9 +95,16 @@ var roleBuilder = {
             if(creep.carry.energy == creep.carryCapacity) {
                 var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
                 var reprsLo = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits <= 5000});
-                if(sites.length > reprsLo.length * 1.5) {
-                    creep.memory.state = 2;
-                    creep.say('build');
+                if(sites.length) {
+                    var pri = _.filter(sites, (site) => site.structureType != STRUCTURE_WALL);
+                    if(pri.length || sites.length > reprsLo.length * 1.5) {
+                        creep.memory.state = 2;
+                        creep.say('build');
+                    }
+                    else {
+                        creep.memory.state = 1;
+                        creep.say('repair');
+                    }
                 }
                 else {
                     creep.memory.state = 1;
