@@ -48,8 +48,8 @@ var roleBuilder = {
                 creep.say('harvest');
             }
             else {
-                var reprsLo = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits <= 10000});
-                var reprsHi = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits > 10000});
+                var reprsLo = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits <= 5000});
+                var reprsHi = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits > 5000});
                 if(reprsLo.length) {
                     var targ = creep.pos.findClosestByPath(bestStruct(reprsLo));
                     if(creep.repair(targ) == ERR_NOT_IN_RANGE) {
@@ -88,7 +88,7 @@ var roleBuilder = {
         else if(creep.memory.state == 3) {
             if(creep.carry.energy == creep.carryCapacity) {
                 var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
-                var reprsLo = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits <= 10000});
+                var reprsLo = creep.room.find(FIND_STRUCTURES, {filter: (structure) => structure.hits < structure.hitsMax && structure.hits <= 5000});
                 if(sites.length > reprsLo.length * 1.5) {
                     creep.memory.state = 2;
                     creep.say('build');
