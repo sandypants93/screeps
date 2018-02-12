@@ -31,7 +31,7 @@ function creepNums(spawn) {
 var roleSpawner = {
     /** @param {Spawn} spawn **/
     run: function(spawn) {
-	var myCreeps = creepNums(spawn);
+        var myCreeps = creepNums(spawn);
         var conLvl = spawn.room.controller.level;
         if(myCreeps[0] < spawn.memory.maxHarvesters) {
             var en = energyTotal(spawn);
