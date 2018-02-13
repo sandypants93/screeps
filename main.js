@@ -1,3 +1,4 @@
+/* get the exports from our modules */
 var roleSpawner = require('role.spawner');
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
